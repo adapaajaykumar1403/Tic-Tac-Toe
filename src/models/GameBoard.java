@@ -1,6 +1,6 @@
 package models;
 
-public class Board {
+public class GameBoard {
     private int boardId;
     private char[][] board;
     private int [] rowArr;
@@ -8,7 +8,7 @@ public class Board {
     private int diag;
     private int antiDiag;
 
-    public Board(int boardId){
+    public GameBoard(int boardId){
         this.boardId = boardId;
         this.board = new char[3][3];
         this.rowArr = new int[3];

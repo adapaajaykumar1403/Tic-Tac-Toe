@@ -5,7 +5,7 @@ import models.User;
 import java.util.HashMap;
 
 public class UserDB {
-    private HashMap<String, User> userMap;
+    private final HashMap<String, User> userMap;
 
     public UserDB(){
         this.userMap = new HashMap<>();
@@ -15,7 +15,7 @@ public class UserDB {
         String email = user.getEmail();
         this.userMap.put(email, user);
     }
-    public int generateID(){
+    public int generateUserID(){
         return this.userMap.size()+1;
     }
     public User getUserByEmail(String email){
@@ -25,7 +25,7 @@ public class UserDB {
     }
 
     public User createNewUser(String name, String email, String password){
-        int id = generateID();
+        int id = generateUserID();
         User user = new User(id, name, email, password);
         saveUser(user);
         return user;

@@ -1,13 +1,20 @@
 package repositories;
 
-import models.Board;
+import models.GameBoard;
 
 import java.util.HashMap;
 
 public class BoardDB {
-    HashMap<Integer, Board> boardDB;
+    private final HashMap<Integer, GameBoard> boardMap;
 
     public BoardDB(){
-        this.boardDB = new HashMap<>();
+        this.boardMap = new HashMap<>();
+    }
+    public int generateBoardId(){
+        return this.boardMap.size()+1;
+    }
+    public void saveBoard(GameBoard gameBoard){
+        int boardId = gameBoard.getBoardId();
+        this.boardMap.put(boardId, gameBoard);
     }
 }

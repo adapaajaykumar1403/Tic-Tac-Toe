@@ -1,11 +1,12 @@
 package builders;
 
+import controllers.BoardController;
 import controllers.GameController;
-import models.Game;
-import models.User;
 import repositories.BoardDB;
 import repositories.GameDB;
 import repositories.UserDB;
+import services.BoardService;
+import services.GameService;
 import services.UserService;
 
 import java.util.Scanner;
@@ -15,18 +16,25 @@ public class AppBuilder {
     private static UserDB userDB;
     private static GameDB gameDB;
     private static BoardDB boardDB;
+    private static BoardController boardController;
     private static GameController gameController;
     private static UserService userService;
+    private static GameService gameService;
+    private static BoardService boardService;
     private static Scanner sc;
 
     private AppBuilder(){
         System.out.println("[builder]: Essentials class object creation started..");
-        AppBuilder.userDB = new UserDB();
-        AppBuilder.gameDB = new GameDB();
-        AppBuilder.boardDB = new BoardDB();
-        AppBuilder.gameController = new GameController();
-        AppBuilder.userService = new UserService();
-        AppBuilder.sc = new Scanner(System.in);
+
+        sc = new Scanner(System.in);
+        userDB = new UserDB();
+        gameDB = new GameDB();
+        boardDB = new BoardDB();
+        userService = new UserService(userDB);
+        boardService = new BoardService(boardDB);
+        gameService = new GameService(gameDB, boardService);
+        boardController = new BoardController();
+        gameController = new GameController(sc, userService, gameService, boardController);
         System.out.println("[builder]: Essentials class object creation ended..");
     }
     public static AppBuilder getInstance(){

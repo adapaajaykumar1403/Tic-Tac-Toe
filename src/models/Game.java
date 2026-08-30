@@ -1,34 +1,34 @@
 package models;
 
+import Enums.GameStatus;
+
 import java.time.LocalDateTime;
 
 public class Game {
-    private int gameID;
+    private int gameId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private User player1;
     private User player2;
-    private Board board;
+    private GameBoard gameBoard;
     private String status;
     private User winner;
 
-    public Game(int gameID, LocalDateTime startTime, LocalDateTime endTime, User player1, User player2, Board board, String status, User winner) {
-        this.gameID = gameID;
+    public Game(int gameId, LocalDateTime startTime, User player1, User player2, GameBoard gameBoard) {
+        this.gameId = gameId;
         this.startTime = startTime;
-        this.endTime = endTime;
         this.player1 = player1;
         this.player2 = player2;
-        this.board = board;
-        this.status = status;
-        this.winner = winner;
+        this.gameBoard = gameBoard;
+        this.status = GameStatus.IN_PROGRESS.toString();
     }
 
     public int getGameID() {
-        return gameID;
+        return gameId;
     }
 
     public void setGameID(int gameID) {
-        this.gameID = gameID;
+        this.gameId = gameID;
     }
 
     public LocalDateTime getStartTime() {
@@ -63,12 +63,12 @@ public class Game {
         this.player2 = player2;
     }
 
-    public Board getBoard() {
-        return board;
+    public GameBoard getGameBoard() {
+        return gameBoard;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setGameBoard(GameBoard gameBoard) {
+        this.gameBoard = gameBoard;
     }
 
     public String getStatus() {
