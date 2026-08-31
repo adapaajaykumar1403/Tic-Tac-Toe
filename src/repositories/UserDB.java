@@ -18,6 +18,13 @@ public class UserDB {
     public int generateUserID(){
         return this.userMap.size()+1;
     }
+    public User getUserById(int id){
+        for(User user : userMap.values()) {
+            if (user.getUserId() == id)
+                return user;
+        }
+        return null;
+    }
     public User getUserByEmail(String email){
 //        if(!this.userMap.containsKey((email)))
 //            return null;
@@ -31,5 +38,8 @@ public class UserDB {
         return user;
     }
 
+    public  int getNumberOfUser(){
+        return userMap.size();
+    }
 
 }

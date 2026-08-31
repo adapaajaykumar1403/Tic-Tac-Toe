@@ -2,11 +2,13 @@ package builders;
 
 import controllers.BoardController;
 import controllers.GameController;
+import controllers.UserController;
 import repositories.BoardDB;
 import repositories.GameDB;
 import repositories.UserDB;
 import services.BoardService;
 import services.GameService;
+import services.StatsService;
 import services.UserService;
 
 import java.util.Scanner;
@@ -17,14 +19,16 @@ public class AppBuilder {
     private static GameDB gameDB;
     private static BoardDB boardDB;
     private static BoardController boardController;
+    private static UserController userController;
     private static GameController gameController;
     private static UserService userService;
     private static GameService gameService;
     private static BoardService boardService;
+    private static StatsService statsService;
     private static Scanner sc;
 
     private AppBuilder(){
-        System.out.println("[builder]: Essentials class object creation started..");
+        //System.out.println("[builder]: Essentials class object creation started..");
 
         sc = new Scanner(System.in);
         userDB = new UserDB();
@@ -32,10 +36,13 @@ public class AppBuilder {
         boardDB = new BoardDB();
         userService = new UserService(userDB);
         boardService = new BoardService(boardDB);
-        gameService = new GameService(gameDB, boardService);
+        gameService = new GameService(gameDB, boardService, userService);
+        statsService = new StatsService(gameDB);
         boardController = new BoardController();
-        gameController = new GameController(sc, userService, gameService, boardController);
-        System.out.println("[builder]: Essentials class object creation ended..");
+        userController = new UserController(sc, userService, statsService);
+        gameController = new GameController(sc, userService, gameService, boardController, userController);
+
+        //System.out.println("[builder]: Essentials class object creation ended..");
     }
     public static AppBuilder getInstance(){
         if(instance == null){

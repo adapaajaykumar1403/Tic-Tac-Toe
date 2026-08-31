@@ -17,4 +17,10 @@ public class UserService {
     public User getExistingUser(String email){
         return userDB.getUserByEmail(email);
     }
+    public int getNumberOfUsers(){
+        return userDB.getNumberOfUser();
+    }
+    public User getUserById(int id){
+        return userDB.getUserById(id);
+    }
 }

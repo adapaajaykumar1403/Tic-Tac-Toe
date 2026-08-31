@@ -1,3 +1,4 @@
+import Enums.GameStatus;
 import builders.AppBuilder;
 import controllers.GameController;
 
@@ -8,6 +9,7 @@ public class Main {
         AppBuilder appBuilder = AppBuilder.getInstance();
         GameController gameController = AppBuilder.getGameController();
         gameController.startGame();
+        System.out.println(GameStatus.COMPLETED.toString());
 
     }
 }
