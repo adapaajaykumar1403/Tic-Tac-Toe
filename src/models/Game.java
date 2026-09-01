@@ -11,7 +11,7 @@ public class Game {
     private User player1;
     private User player2;
     private GameBoard gameBoard;
-    private String status;
+    private GameStatus status;
     private User winner;
 
     public Game(int gameId, LocalDateTime startTime, User player1, User player2, GameBoard gameBoard) {
@@ -20,7 +20,7 @@ public class Game {
         this.player1 = player1;
         this.player2 = player2;
         this.gameBoard = gameBoard;
-        this.status = GameStatus.IN_PROGRESS.toString();
+        this.status = GameStatus.IN_PROGRESS;
     }
 
     public int getGameID() {
@@ -71,11 +71,11 @@ public class Game {
         this.gameBoard = gameBoard;
     }
 
-    public String getStatus() {
+    public GameStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(GameStatus status) {
         this.status = status;
     }
 

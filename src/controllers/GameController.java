@@ -97,11 +97,11 @@ public class GameController {
         game.setEndTime(LocalDateTime.now());
         game.setWinner(winner);
         if(winner == null){
-            game.setStatus(GameStatus.DRAW.toString());
+            game.setStatus(GameStatus.DRAW);
             System.out.println("*** GAME DRAWN ***");
             return;
         }
-        game.setStatus(GameStatus.COMPLETED.toString());
+        game.setStatus(GameStatus.COMPLETED);
         System.out.println("*** Hurray...! "+winner.getName()+" WON the game ***");
     }
 

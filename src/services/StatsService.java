@@ -1,5 +1,6 @@
 package services;
 
+import Enums.GameStatus;
 import models.Game;
 import models.PlayerStats;
 import models.User;
@@ -29,7 +30,7 @@ public class StatsService {
         for(Game game: gamesPlayed){
             if(game.getWinner() == player){
                 won++;
-            }else if(game.getStatus().equals("DRAW")){
+            }else if(game.getStatus().equals(GameStatus.DRAW)){
                 draw++;
             }else {
                 lost++;

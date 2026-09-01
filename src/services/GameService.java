@@ -1,5 +1,6 @@
 package services;
 
+import Enums.GameStatus;
 import models.Game;
 import models.GameBoard;
 import models.GameStats;
@@ -30,42 +31,14 @@ public class GameService {
     }
 
     public boolean isValidMove(int x, int y, Game game){
-        char[][] board = game.getGameBoard().getBoard();
-        if(x<0 || x>2 || y<0 || y>2 || board[x][y] == 'X' || board[x][y] =='O'){
-            return false;
-        }
-        return true;
+        GameBoard gameBoard =  game.getGameBoard();
+        return gameBoard.isValidMove(x, y);
     }
 
     public User validateMove(int turn, int x, int y, Game game){
         GameBoard gameBoard = game.getGameBoard();
-        char[][] board = gameBoard.getBoard();
-        int[] rowArr = gameBoard.getRowArr();
-        int[] colArr = gameBoard.getColArr();
-        int diag = gameBoard.getDiag();
-        int antiDiag = gameBoard.getAntiDiag();
-        if(board[x][y] == 'X' || board[x][y] == 'O'){
-            return null;// exception.........
-        }
-        char ch = (turn == 1) ? 'X' : 'O';
-        int val = (ch == 'X') ? 1 : -1;
-        board[x][y] = ch;
-        rowArr[x] = rowArr[x] + val;
-        colArr[y] = colArr[y] + val;
-        if(x == y){
-            diag += val;
-            gameBoard.setDiag(diag);
-        }
-        if(x+y == 2){
-            antiDiag += val;
-            gameBoard.setAntiDiag(antiDiag);
-        }
         User winner = null;
-        if(rowArr[x] == 3 || rowArr[x] == -3 ||
-                colArr[y] == 3 || colArr[y] == -3 ||
-                diag == 3 || diag == -3 ||
-                antiDiag == 3 || antiDiag == -3
-            ){
+        if(gameBoard.validateMove(turn, x, y)){
             winner = (turn == 1) ? game.getPlayer1() : game.getPlayer2();
         }
         return winner;
@@ -82,7 +55,7 @@ public class GameService {
         long longestGame = 0;
         long shortestGame = Long.MAX_VALUE;
         for(Game game : allGames){
-            if(game.getStatus().equals("DRAW"))
+            if(game.getStatus().equals(GameStatus.DRAW))
                 drawn++;
             if (game.getStartTime() != null && game.getEndTime() != null) {
 
